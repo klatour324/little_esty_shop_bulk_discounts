@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :bulk_discount do
-    
+    item_threshold {Faker::Number.between(from: 5, to: 30)}
+    percent_discount {[0.05, 0.10, 0.20, 0.30].sample}
+    name {"#{Faker::Nation.nationality} Day Discount"}
+    merchant
   end
 
   factory :customer do
