@@ -1,0 +1,12 @@
+<h1>Bulk Discounts</h1>
+
+<% @merchant.bulk_discounts.each do |bulk_discount| %>
+  <section class="bulk-discount-info-<%= bulk_discount.id %>">
+    <ul>
+      <li><%= bulk_discount.name %></li>
+      <li><%= bulk_discount.percent_discount %></li>
+      <li><%= bulk_discount.item_threshold %></li>
+      <li><%= link_to "#{bulk_discount.id}", merchant_bulk_discounts_path(@merchant.id, bulk_discount.id) %> </li>
+    </ul>
+  </section>
+<% end %>
