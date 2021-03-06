@@ -10,9 +10,11 @@ RSpec.describe Item, type: :model do
   describe "relationships" do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should belong_to :merchant }
+    it { should have_many :invoice_items }
+    it { should have_many(:bulk_discounts).through(:merchant) }
   end
   describe "instance methods" do
-    it "best day" do
+    xit "best day" do
       @merchant1 = Merchant.create!(name: 'Hair Care')
       @merchant2 = Merchant.create!(name: 'Jewelry')
 
@@ -33,8 +35,8 @@ RSpec.describe Item, type: :model do
       @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
       @customer_6 = Customer.create!(first_name: 'Herber', last_name: 'Coon')
 
-      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 2,  created_at: "2012-03-27 14:54:09")
-      @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 2,  created_at: "2012-03-28 14:54:09")
+      @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
+      @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 2, created_at: "2012-03-28 14:54:09")
       @invoice_3 = Invoice.create!(customer_id: @customer_2.id, status: 2)
       @invoice_4 = Invoice.create!(customer_id: @customer_3.id, status: 2)
       @invoice_5 = Invoice.create!(customer_id: @customer_4.id, status: 2)
