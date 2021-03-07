@@ -23,7 +23,6 @@ RSpec.describe "Merchant Bulk Discounts Index" do
       end
     end
 
-
     it "can display all of a merchant's bulk discounts including percentage discount and quantity thresholds" do
       VCR.use_cassette("nager_data_service_next_public_holidays") do
         visit merchant_bulk_discounts_path(@merchant1)
