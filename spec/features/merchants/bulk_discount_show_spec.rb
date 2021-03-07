@@ -20,17 +20,5 @@ RSpec.describe "Merchant Bulk Discount Show" do
         expect(page).to_not have_content(@bulk_discount_2.percent_discount)
       end
     end
-
-    it "can edit the bulk discount information when clicking the edit link" do
-      VCR.use_cassette("bulk_discount_creation") do
-        visit "/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}"
-
-        expect(page).to have_link("Edit Bulk Discount")
-
-        click_link("Edit Bulk Discount")
-
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
-      end
-    end
   end
 end
