@@ -4,6 +4,10 @@ class BulkDiscountsController < ApplicationController
     @public_holidays = NagerDateService.new("US").next_public_holidays
   end
 
+  def show
+    @bulk_discount= BulkDiscount.find(params[:id])
+  end
+
   def new
     @merchant = Merchant.find(params[:merchant_id])
   end
