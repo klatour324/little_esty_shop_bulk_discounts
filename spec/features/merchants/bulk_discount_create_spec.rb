@@ -17,9 +17,9 @@ RSpec.describe "Merchant Bulk Discount Create Page" do
         expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/new")
         expect(page).to have_content("Create a New Bulk Discount")
 
-        fill_in "name", with: "End of Bin Deal!"
-        fill_in "item_threshold", with: 5
-        fill_in "percent_discount", with: 0.10
+        fill_in "bulk_discount[name]", with: "End of Bin Deal!"
+        fill_in "bulk_discount[item_threshold]", with: 5
+        fill_in "bulk_discount[percent_discount]", with: 0.10
 
         click_button("Add New Bulk Discount")
 
