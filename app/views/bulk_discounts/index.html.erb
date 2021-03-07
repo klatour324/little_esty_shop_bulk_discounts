@@ -1,13 +1,19 @@
 <h1>Bulk Discounts</h1>
 
-<% @merchant.bulk_discounts.each do |bulk_discount| %>
-  <section class="bulk-discount-info-<%= bulk_discount.id %>">
-    <ul>
-      <li>Discount Name: <%= bulk_discount.name %></li>
-      <li>Percentage Discount: <%= bulk_discount.percent_discount %></li>
-      <li>Item Quantity Threshold: <%= bulk_discount.item_threshold %></li>
-      <li>Bulk Discount #<%= link_to "#{bulk_discount.id}", merchant_bulk_discounts_path(@merchant.id, bulk_discount.id) %> </li>
+<ul>
+  <% @merchant.bulk_discounts.each do |bulk_discount| %>
+    <li class="bulk-discount-info-<%= bulk_discount.id %>">
+      <h3>Discount Name: <%= bulk_discount.name %></h3>
+      <h3>Percentage Discount: <%= bulk_discount.percent_discount %></h3>
+      <h3>Item Quantity Threshold: <%= bulk_discount.item_threshold %></h3>
+      <h3>Bulk Discount #<%= link_to "#{bulk_discount.id}", merchant_bulk_discounts_path(@merchant.id, bulk_discount.id) %> </h3>
       <hr>
-    </ul>
-  </section>
-<% end %>
+    </li>
+  <% end %>
+</ul>
+<h2>Upcoming Holidays</h2>
+<ul>
+  <% @public_holidays.each do |public_holiday| %>
+    <li><%= public_holiday.local_name %></li>
+  <% end %>
+</ul>
