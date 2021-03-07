@@ -27,5 +27,16 @@ RSpec.describe "Merchant Bulk Discount Create Page" do
         expect(page).to have_content("End of Bin Deal!")
       end
     end
+
+    it "cannot create a new bulk discount unless all required fields of form are filled out" do
+      VCR.use_cassette("bulk_discount_creation") do
+        visit "/merchant/#{@merchant.id}/bulk_discounts/new"
+
+        click_button("Add New Bulk Discount")
+
+        expect(page).to have_content("Error. Missing Fields Required.")
+        expect(page).to have_button("Add New Bulk Discount")
+      end
+    end
   end
 end
