@@ -1,14 +1,6 @@
 <h1>Create a New Bulk Discount</h1>
 
-<%= form_with url: merchant_bulk_discounts_path(@merchant), method: :post, local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :item_threshold %>
-  <%= f.number_field :item_threshold %>
-
-  <%= f.label :percent_discount %>
-  <%= f.number_field :percent_discount %>
-
-  <%= f.submit "Add New Bulk Discount" %>
-<% end %>
+<%= render partial: "form", locals: { model: @bulk_discount,
+                                      url: merchant_bulk_discounts_path(@merchant),
+                                      method: :post,
+                                      button_text: "Add New Bulk Discount"} %>
