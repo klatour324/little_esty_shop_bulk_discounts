@@ -11,42 +11,67 @@ RSpec.describe "Merchant Bulk Discounts Index" do
 
   describe "when I visit my merchant dashboard" do
     it "can see a link to view all discounts and when I click this link, I  am taken to my bulk discounts index page" do
-      visit merchant_dashboard_index_path(@merchant1)
+      VCR.use_cassette("nager_data_service_next_public_holidays") do
+        visit merchant_dashboard_index_path(@merchant1)
 
-      within(".nav-container") do
-        expect(page).to have_link("My Discounts")
-        click_link("My Discounts")
+        within(".nav-container") do
+          expect(page).to have_link("My Discounts")
+          click_link("My Discounts")
+        end
+
+        expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
       end
-
-      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
     end
 
-    it "can display all of a merchant's bulk discounts including percentage discount and quantity thresholds" do
-      visit merchant_bulk_discounts_path(@merchant1)
 
-      @merchant1.bulk_discounts.each do |bulk_discount|
-        within(".bulk-discount-info-#{bulk_discount.id}") do
-          expect(page).to have_content(bulk_discount.name)
-          expect(page).to have_content(bulk_discount.percent_discount)
-          expect(page).to have_content(bulk_discount.item_threshold)
+    it "can display all of a merchant's bulk discounts including percentage discount and quantity thresholds" do
+      VCR.use_cassette("nager_data_service_next_public_holidays") do
+        visit merchant_bulk_discounts_path(@merchant1)
+
+        @merchant1.bulk_discounts.each do |bulk_discount|
+          within(".bulk-discount-info-#{bulk_discount.id}") do
+            expect(page).to have_content(bulk_discount.name)
+            expect(page).to have_content(bulk_discount.percent_discount)
+            expect(page).to have_content(bulk_discount.item_threshold)
+          end
         end
       end
     end
 
     it "has a link next to each bulk discount listed that links to its show page" do
-      visit merchant_bulk_discounts_path(@merchant1)
+      VCR.use_cassette("nager_data_service_next_public_holidays") do
+        visit merchant_bulk_discounts_path(@merchant1)
 
-      within(".bulk-discount-info-#{@bulk_discount_1.id}") do
-        expect(page).to have_link("#{@bulk_discount_1.id}")
+        within(".bulk-discount-info-#{@bulk_discount_1.id}") do
+          expect(page).to have_link("#{@bulk_discount_1.id}")
+        end
+
+        within(".bulk-discount-info-#{@bulk_discount_2.id}") do
+          expect(page).to have_link("#{@bulk_discount_2.id}")
+        end
+
+        within(".bulk-discount-info-#{@bulk_discount_3.id}") do
+          expect(page).to have_link("#{@bulk_discount_3.id}")
+        end
       end
+    end
 
-      within(".bulk-discount-info-#{@bulk_discount_2.id}") do
-        expect(page).to have_link("#{@bulk_discount_2.id}")
-      end
+    it "has a section for 'Upcoming Holidays' that lists the next three upcoming US holidays" do
+      VCR.use_cassette("nager_data_service_next_public_holidays") do
+        visit merchant_bulk_discounts_path(@merchant1)
 
-      within(".bulk-discount-info-#{@bulk_discount_3.id}") do
-        expect(page).to have_link("#{@bulk_discount_3.id}")
+        expect(page).to have_content("Upcoming Holidays")
+        expect(page).to have_content("Memorial Day")
+        expect(page).to have_content("Independence Day")
+        expect(page).to have_content("Labor Day")
       end
     end
   end
 end
+
+# As a merchant
+# When I visit the discounts index page
+# I see a section with a header of "Upcoming Holidays"
+# In this section the name and date of the next 3 upcoming US holidays are listed.
+#
+# Use the Next Public Holidays Endpoint in the [Nager.Date API](https://date.nager.at/swagger/index.html)
