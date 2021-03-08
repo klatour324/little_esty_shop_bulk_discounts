@@ -141,7 +141,17 @@ RSpec.describe 'invoices show' do
       VCR.use_cassette("bulk_discount_creation") do
         visit "/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}"
 
-        expect(page).to have_link("View Bulk Discount Applied")
+        within("#the-status-#{@ii_1.id}") do
+          expect(page).to have_link("Bulk Discount #{@bulk_discount1.percent_discount} Applied")
+        end
+
+        within("#the-status-#{@ii_3.id}") do
+          expect(page).to have_link("Bulk Discount #{@bulk_discount5.percent_discount} Applied")
+        end
+
+        within("#the-status-#{@ii8.id}") do
+          expect(page).to have_link("No Bulk Discount Applied. Item Threshold Not Met.")
+        end
       end
     end
   end
