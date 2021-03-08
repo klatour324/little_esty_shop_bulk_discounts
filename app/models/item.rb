@@ -13,7 +13,6 @@ class Item < ApplicationRecord
 
   def best_day
     invoices
-    .where('invoices.status = 2')
     .joins(:invoice_items)
     .select('invoices.*, sum(invoice_items.unit_price * invoice_items.quantity) as money')
     .group(:id)
@@ -21,5 +20,7 @@ class Item < ApplicationRecord
     .first
     .created_at
     .to_date
+
+    # .where('invoices.status = ?', 2) ## where statement not working properly with the joins, but should be incorporated
   end
 end
