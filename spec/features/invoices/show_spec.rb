@@ -136,5 +136,13 @@ RSpec.describe 'invoices show' do
         expect(page).to have_content("Total Revenue: 234.0")
       end
     end
+
+    it "displays a link next to each invoice item that links user to show page for bulk discount if applied" do
+      VCR.use_cassette("bulk_discount_creation") do
+        visit "/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}"
+
+        expect(page).to have_link("View Bulk Discount Applied")
+      end
+    end
   end
 end
