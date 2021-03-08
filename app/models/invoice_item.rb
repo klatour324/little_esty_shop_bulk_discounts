@@ -16,4 +16,26 @@ class InvoiceItem < ApplicationRecord
     invoice_ids = InvoiceItem.where("status = 0 OR status = 1").pluck(:invoice_id)
     Invoice.order(created_at: :asc).find(invoice_ids)
   end
+
+  def available_discount
+    item
+    .merchant
+    .bulk_discounts
+    .order(percent_discount: :desc)
+    .where('item_threshold <= ?', "#{self.quantity}")
+    .first
+  end
+
+  def revenue
+    # invoice_item_revenue = unit_price * quantity
+    # require "pry"; binding.pry
+    # discount = invoice_item_revenue - (invoice_item_revenue * available_discount.percent_discount)
+    # if available_discount.nil?
+      # invoice_item_revenue
+    # else
+      # discount
+    # end
+    return unit_price * quantity if available_discount.nil?
+    unit_price * quantity * (1 - available_discount.percent_discount)
+  end
 end
