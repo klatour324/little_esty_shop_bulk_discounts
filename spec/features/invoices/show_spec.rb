@@ -142,7 +142,6 @@ RSpec.describe 'invoices show' do
         visit "/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}"
 
         expect(page).to have_link("View Bulk Discount Applied")
-        save_and_open_page
       end
     end
   end
