@@ -22,20 +22,18 @@ class InvoiceItem < ApplicationRecord
     .merchant
     .bulk_discounts
     .order(percent_discount: :desc)
+    .order(item_threshold: :desc)
     .where('item_threshold <= ?', "#{self.quantity}")
     .first
   end
 
   def revenue
-    # invoice_item_revenue = unit_price * quantity
-    # require "pry"; binding.pry
-    # discount = invoice_item_revenue - (invoice_item_revenue * available_discount.percent_discount)
-    # if available_discount.nil?
-      # invoice_item_revenue
-    # else
-      # discount
-    # end
-    return unit_price * quantity if available_discount.nil?
-    unit_price * quantity * (1 - available_discount.percent_discount)
+    invoice_item_revenue = unit_price * quantity
+    if available_discount.nil?
+      invoice_item_revenue
+    else
+      discount = invoice_item_revenue - (invoice_item_revenue * available_discount.percent_discount)
+      discount
+    end
   end
 end
