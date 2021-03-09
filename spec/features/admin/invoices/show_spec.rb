@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Admin Invoices Index Page' do
+describe 'Admin Invoices Show Page' do
   describe "existing specs" do
     before :each do
       @m1 = Merchant.create!(name: 'Merchant 1')
@@ -43,14 +43,14 @@ describe 'Admin Invoices Index Page' do
       expect(page).to have_content(@ii_1.quantity)
       expect(page).to have_content(@ii_2.quantity)
 
-      expect(page).to have_content("$#{@ii_1.unit_price}")
-      expect(page).to have_content("$#{@ii_2.unit_price}")
+      expect(page).to have_content("#{@ii_1.unit_price}")
+      expect(page).to have_content("#{@ii_2.unit_price}")
 
       expect(page).to have_content(@ii_1.status)
       expect(page).to have_content(@ii_2.status)
 
       expect(page).to_not have_content(@ii_3.quantity)
-      expect(page).to_not have_content("$#{@ii_3.unit_price}")
+      expect(page).to_not have_content("#{@ii_3.unit_price}")
       expect(page).to_not have_content(@ii_3.status)
     end
 
@@ -107,7 +107,7 @@ describe 'Admin Invoices Index Page' do
     it "shows the total revenue including bulk discounts in the calculation" do
       VCR.use_cassette("bulk_discount_creation") do
         visit "/admin/invoices/#{@invoice_1.id}"
-        expect(page).to have_content("Total Revenue: $234.0")
+        expect(page).to have_content("Total Revenue: $234.00")
       end
     end
   end

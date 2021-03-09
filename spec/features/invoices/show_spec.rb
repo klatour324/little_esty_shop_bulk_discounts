@@ -133,7 +133,7 @@ RSpec.describe 'invoices show' do
     it "shows the total revenue including bulk discounts in the calculation" do
       VCR.use_cassette("bulk_discount_creation") do
         visit "/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}"
-        expect(page).to have_content("Total Revenue: 234.0")
+        expect(page).to have_content(@invoice_1.total_revenue)
       end
     end
 
@@ -141,17 +141,19 @@ RSpec.describe 'invoices show' do
       VCR.use_cassette("bulk_discount_creation") do
         visit "/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}"
 
-        within("#the-status-#{@ii_1.id}") do
-          expect(page).to have_link("Bulk Discount #{@bulk_discount1.percent_discount} Applied")
-        end
+        within(".table") do
+          within("#the-status-#{@ii_1.id}") do
+            expect(page).to have_link("Bulk Discount #{@bulk_discount2.id} Applied")
+          end
 
-        within("#the-status-#{@ii_3.id}") do
-          expect(page).to have_link("Bulk Discount #{@bulk_discount5.percent_discount} Applied")
-        end
+          within("#the-status-#{@ii_3.id}") do
+            expect(page).to have_link("Bulk Discount #{@bulk_discount5.id} Applied")
+          end
 
-        within("#the-status-#{@ii8.id}") do
-          expect(page).to not_have_link("Bulk Discount #{@bulk_discount2.percent_discount} Applied")
-          expect(page).to have_content("No Bulk Discount Applied. Item Threshold Not Met.")
+          within("#the-status-#{@ii_8.id}") do
+            expect(page).to_not have_link("Bulk Discount #{@bulk_discount2.id} Applied")
+            expect(page).to have_content("No Bulk Discount Applied. Item Threshold Not Met.")
+          end
         end
       end
     end
