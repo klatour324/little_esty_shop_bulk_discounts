@@ -18,6 +18,7 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
         expect(page).to have_link("Edit Bulk Discount")
 
         click_link("Edit Bulk Discount")
+        save_and_open_page
 
         expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
 
@@ -27,7 +28,7 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
         fill_in("bulk_discount[item_threshold]", with: 10)
         fill_in("bulk_discount[percent_discount]", with: 0.10)
 
-        click_button("Update Bulk Discount")
+        click_button("Update Bulk discount")
 
         expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}")
 
@@ -45,11 +46,11 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
         fill_in("bulk_discount[item_threshold]", with: 100)
         fill_in("bulk_discount[percent_discount]", with: 0.0)
 
-        click_button("Update Bulk Discount")
+        click_button("Update Bulk discount")
 
         expect(page).to have_content("Bulk Discount has not been Updated. Confirm all fields are filled in with correct information. Item Threshold must be greater than 1 and Percent Discount must be greater than 0 and less than 1.")
         expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
-        expect(page).to have_button("Update Bulk Discount")
+        expect(page).to have_button("Update Bulk discount")
       end
     end
   end
