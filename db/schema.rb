@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_021134) do
+ActiveRecord::Schema.define(version: 2021_03_09_214810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bulk_discounts", force: :cascade do |t|
     t.integer "item_threshold"
-    t.decimal "percent_discount"
+    t.integer "percent_discount"
     t.string "name"
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
