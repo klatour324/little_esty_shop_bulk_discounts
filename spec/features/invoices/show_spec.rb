@@ -102,11 +102,11 @@ RSpec.describe 'invoices show' do
     before :each do
       @merchant1 = Merchant.create!(name: 'Hair Care')
 
-      @bulk_discount1 = @merchant1.bulk_discounts.create!(name: "Big Box Sale!", item_threshold: 20, percent_discount: 0.20)
-      @bulk_discount2 = @merchant1.bulk_discounts.create!(name: "Semi-Annual Discount", item_threshold: 10, percent_discount: 0.10)
-      @bulk_discount3 = @merchant1.bulk_discounts.create!(name: "Fall Discount", item_threshold: 30, percent_discount: 0.30)
-      @bulk_discount4 = @merchant1.bulk_discounts.create!(name: "Last Call Discount", item_threshold: 40, percent_discount: 0.40)
-      @bulk_discount5 = @merchant1.bulk_discounts.create!(name: "Blowout Sale!", item_threshold: 20, percent_discount: 0.40)
+      @bulk_discount1 = @merchant1.bulk_discounts.create!(name: "Big Box Sale!", item_threshold: 20, percent_discount: 20)
+      @bulk_discount2 = @merchant1.bulk_discounts.create!(name: "Semi-Annual Discount", item_threshold: 10, percent_discount: 10)
+      @bulk_discount3 = @merchant1.bulk_discounts.create!(name: "Fall Discount", item_threshold: 30, percent_discount: 30)
+      @bulk_discount4 = @merchant1.bulk_discounts.create!(name: "Last Call Discount", item_threshold: 40, percent_discount: 40)
+      @bulk_discount5 = @merchant1.bulk_discounts.create!(name: "Blowout Sale!", item_threshold: 20, percent_discount: 40)
 
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
       @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
@@ -143,15 +143,16 @@ RSpec.describe 'invoices show' do
 
         within(".table") do
           within("#the-status-#{@ii_1.id}") do
-            expect(page).to have_link("Bulk Discount #{@bulk_discount2.percent_discount * 100}% Applied")
+            expect(page).to have_link("Bulk Discount #{@bulk_discount2.percent_discount}% Applied")
+            save_and_open_page
           end
 
           within("#the-status-#{@ii_3.id}") do
-            expect(page).to have_link("Bulk Discount #{@bulk_discount5.percent_discount * 100}% Applied")
+            expect(page).to have_link("Bulk Discount #{@bulk_discount5.percent_discount}% Applied")
           end
 
           within("#the-status-#{@ii_8.id}") do
-            expect(page).to_not have_link("Bulk Discount #{@bulk_discount2.percent_discount * 100}% Applied")
+            expect(page).to_not have_link("Bulk Discount #{@bulk_discount2.percent_discount}% Applied")
             expect(page).to have_content("No Bulk Discount Applied. Item Threshold Not Met.")
           end
         end

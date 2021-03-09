@@ -21,8 +21,7 @@ class BulkDiscountsController < ApplicationController
 
       redirect_to merchant_bulk_discounts_path(@merchant)
     else
-      flash.now[:error] = "Error. Name must be filled out. Item threshold must be greater than 1. Percent discount must be greater than 0 and less than 1."
-
+      flash.now[:errors] = @bulk_discount.errors.full_messages
       render :new
     end
   end

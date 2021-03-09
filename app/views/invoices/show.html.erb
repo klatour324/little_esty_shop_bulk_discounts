@@ -49,7 +49,7 @@
                                           <% end %></td><br/>
             <td style="text-align:center">
               <% if i.available_discount %>
-                <%= link_to "Bulk Discount #{(i.available_discount.percent_discount * 100)}% Applied", merchant_bulk_discount_path(@merchant, i.available_discount.id) %>
+                <%= link_to "Bulk Discount #{(i.available_discount.percent_discount)}% Applied", merchant_bulk_discount_path(@merchant, i.available_discount.id) %>
               <% else %>
                 <p>No Bulk Discount Applied. Item Threshold Not Met.</p>
               <% end %>

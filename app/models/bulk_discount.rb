@@ -8,5 +8,5 @@ class BulkDiscount < ApplicationRecord
 
   validates_presence_of :item_threshold, :percent_discount, :name
   validates_numericality_of :item_threshold, :greater_than => 1
-  validates_numericality_of :percent_discount, :greater_than => 0, :less_than => 1
+  validates_numericality_of :percent_discount, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 100
 end
