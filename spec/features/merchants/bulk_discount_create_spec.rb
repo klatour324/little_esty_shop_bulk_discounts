@@ -34,7 +34,7 @@ RSpec.describe "Merchant Bulk Discount Create Page" do
 
         click_button("Add New Bulk Discount")
 
-        expect(page).to have_content("Error. Missing Fields Required.")
+        expect(page).to have_content("Error. Name must be filled out. Item threshold must be greater than 1. Percent discount must be greater than 0 and less than 1.")
         expect(page).to have_button("Add New Bulk Discount")
       end
     end
