@@ -35,7 +35,11 @@ RSpec.describe "Merchant Bulk Discount Create Page" do
 
         click_button("Create Bulk discount")
 
-        expect(page).to have_content("Error. Name must be filled out. Item threshold must be greater than 1. Percent discount must be greater than 0 and less than 1.")
+        expect(page).to have_content("Item threshold can't be blank")
+        expect(page).to have_content("Item threshold is not a number")
+        expect(page).to have_content("Percent discount can't be blank")
+        expect(page).to have_content("Percent discount is not a number")
+        expect(page).to have_content("Name can't be blank")
         expect(page).to have_button("Create Bulk discount")
       end
     end
