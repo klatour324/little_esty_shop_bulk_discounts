@@ -13,7 +13,7 @@ RSpec.describe InvoiceItem, type: :model do
     @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
     @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:09")
-    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 40, unit_price: 1, status: 2)
+    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 20, unit_price: 1, status: 2)
 
   end
 
@@ -33,11 +33,13 @@ RSpec.describe InvoiceItem, type: :model do
 
   describe "instance methods" do
     it "#available discount" do
-      expect(@ii_1.available_discount).to eq(@bulk_discount4)
+      expect(@ii_1.available_discount).to eq(@bulk_discount5)
+      expect(@ii_1.available_discount).to_not eq(@bulk_discount1)
     end
 
     it "#revenue" do
-      expect(@ii_1.revenue).to eq(24)
+      expect(@ii_1.revenue).to eq(12)
+      expect(@ii_1.revenue).to_not eq(16)
     end
   end
 end
