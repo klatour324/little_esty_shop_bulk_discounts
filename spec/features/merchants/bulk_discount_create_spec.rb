@@ -13,7 +13,6 @@ RSpec.describe "Merchant Bulk Discount Create Page" do
         expect(page).to have_link("Create New Discount")
 
         click_link("Create New Discount")
-        save_and_open_page
 
         expect(current_path).to eq("/merchant/#{@merchant.id}/bulk_discounts/new")
         expect(page).to have_content("Create a New Bulk Discount")
