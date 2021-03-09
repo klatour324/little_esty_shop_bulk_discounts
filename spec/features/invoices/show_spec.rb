@@ -143,15 +143,15 @@ RSpec.describe 'invoices show' do
 
         within(".table") do
           within("#the-status-#{@ii_1.id}") do
-            expect(page).to have_link("Bulk Discount #{@bulk_discount2.id} Applied")
+            expect(page).to have_link("Bulk Discount #{@bulk_discount2.percent_discount * 100}% Applied")
           end
 
           within("#the-status-#{@ii_3.id}") do
-            expect(page).to have_link("Bulk Discount #{@bulk_discount5.id} Applied")
+            expect(page).to have_link("Bulk Discount #{@bulk_discount5.percent_discount * 100}% Applied")
           end
 
           within("#the-status-#{@ii_8.id}") do
-            expect(page).to_not have_link("Bulk Discount #{@bulk_discount2.id} Applied")
+            expect(page).to_not have_link("Bulk Discount #{@bulk_discount2.percent_discount * 100}% Applied")
             expect(page).to have_content("No Bulk Discount Applied. Item Threshold Not Met.")
           end
         end

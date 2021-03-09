@@ -43,14 +43,14 @@
           <tr class="tr">
             <td style="text-align:center"><%= i.item.name %></td>
             <td style="text-align:center"><%= i.quantity %></td>
-            <td style="text-align:center">$<%= number_to_currency(i.unit_price) %></td>
+            <td style="text-align:center"><%= number_to_currency(i.unit_price) %></td>
             <td style="text-align:center"><%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch do |f| %>
                                             <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
                                             <%= f.submit 'Update Invoice' %>
                                           <% end %></td><br/>
             <td style="text-align:center">
               <% if i.available_discount %>
-                <%= link_to "Bulk Discount #{i.available_discount.id} Applied", merchant_bulk_discount_path(@merchant, i.available_discount.id) %>
+                <%= link_to "Bulk Discount #{(i.available_discount.percent_discount * 100)}% Applied", merchant_bulk_discount_path(@merchant, i.available_discount.id) %>
               <% else %>
                 <p>No Bulk Discount Applied. Item Threshold Not Met.</p>
               <% end %>
