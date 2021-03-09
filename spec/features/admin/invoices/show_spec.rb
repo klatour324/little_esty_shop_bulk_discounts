@@ -76,11 +76,11 @@ describe 'Admin Invoices Show Page' do
     before :each do
       @m1 = Merchant.create!(name: 'Merchant 1')
 
-      @bulk_discount1 = @m1.bulk_discounts.create!(name: "Big Box Sale!", item_threshold: 20, percent_discount: 0.20)
-      @bulk_discount2 = @m1.bulk_discounts.create!(name: "Semi-Annual Discount", item_threshold: 10, percent_discount: 0.10)
-      @bulk_discount3 = @m1.bulk_discounts.create!(name: "Fall Discount", item_threshold: 30, percent_discount: 0.30)
-      @bulk_discount4 = @m1.bulk_discounts.create!(name: "Last Call Discount", item_threshold: 40, percent_discount: 0.40)
-      @bulk_discount5 = @m1.bulk_discounts.create!(name: "Blowout Sale!", item_threshold: 20, percent_discount: 0.40)
+      @bulk_discount1 = @m1.bulk_discounts.create!(name: "Big Box Sale!", item_threshold: 20, percent_discount: 20)
+      @bulk_discount2 = @m1.bulk_discounts.create!(name: "Semi-Annual Discount", item_threshold: 10, percent_discount: 10)
+      @bulk_discount3 = @m1.bulk_discounts.create!(name: "Fall Discount", item_threshold: 30, percent_discount: 30)
+      @bulk_discount4 = @m1.bulk_discounts.create!(name: "Last Call Discount", item_threshold: 40, percent_discount: 40)
+      @bulk_discount5 = @m1.bulk_discounts.create!(name: "Blowout Sale!", item_threshold: 20, percent_discount: 40)
 
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @m1.id, status: 1)
       @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @m1.id)

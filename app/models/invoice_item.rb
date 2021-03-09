@@ -32,7 +32,7 @@ class InvoiceItem < ApplicationRecord
     if available_discount.nil?
       invoice_item_revenue
     else
-      discount = invoice_item_revenue - (invoice_item_revenue * available_discount.percent_discount)
+      discount = invoice_item_revenue * (( 100 - available_discount.percent_discount.to_f) / 100)
       discount
     end
   end

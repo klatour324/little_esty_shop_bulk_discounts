@@ -19,7 +19,7 @@ RSpec.describe "Merchant Bulk Discount Create Page" do
 
         fill_in "bulk_discount[name]", with: "End of Bin Deal!"
         fill_in "bulk_discount[item_threshold]", with: 5
-        fill_in "bulk_discount[percent_discount]", with: 0.10
+        fill_in "bulk_discount[percent_discount]", with: 10
 
         click_button("Create Bulk discount")
 
