@@ -61,8 +61,11 @@ RSpec.describe "Merchant Bulk Discounts Index" do
 
         expect(page).to have_content("Upcoming Holidays")
         expect(page).to have_content("Memorial Day")
+        expect(page).to have_content("2021-05-31")
         expect(page).to have_content("Independence Day")
+        expect(page).to have_content("2021-07-05")
         expect(page).to have_content("Labor Day")
+        expect(page).to have_content("2021-09-06")
       end
     end
   end

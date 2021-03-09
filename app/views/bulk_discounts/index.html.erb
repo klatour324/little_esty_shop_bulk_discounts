@@ -16,6 +16,7 @@
 <h2>Upcoming Holidays</h2>
 <ul>
   <% @public_holidays.each do |public_holiday| %>
-    <li><%= public_holiday.local_name %></li>
+    <li>Holiday: <%= public_holiday.local_name %></li>
+    <li>Date: <%= public_holiday.date %></li>
   <% end %>
 </ul>
