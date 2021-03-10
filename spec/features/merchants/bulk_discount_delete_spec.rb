@@ -62,7 +62,7 @@ RSpec.describe "Merchant Bulk Discount Delete" do
 
         within(".bulk-discount-info-#{bd_2.id}") do
           expect(page).to_not have_link("Delete Bulk Discount")
-          expect(page).to have_content("Error: Can't Delete due to Pending Invoices")
+          expect(page).to have_content("Can't Delete due to Pending Invoices")
         end
       end
     end

@@ -1,5 +1,9 @@
-<h1><%= @merchant.name %>'s <%= @bulk_discount.name %></h1><br>
+<h1><%= @bulk_discount.name %>Discount</h1><br>
 <h3>Item Threshold: <%= @bulk_discount.item_threshold %></h3><hr>
 <h3>Percent Discount: <%= number_to_percentage(@bulk_discount.percent_discount, precision: 0) %></h3><hr>
 
-<%= link_to 'Edit Bulk Discount', edit_merchant_bulk_discount_path(@merchant, @bulk_discount) %>
+<% if @bulk_discount.pending_invoice_items? %>
+  <p>Can't Edit due to Pending Invoices</p>
+<% else %>
+  <%= link_to 'Edit Bulk Discount', edit_merchant_bulk_discount_path(@merchant, @bulk_discount) %>
+<% end %>
