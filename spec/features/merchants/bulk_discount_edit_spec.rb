@@ -37,17 +37,79 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
       end
     end
 
-    it "cannot edit a form with invalid input on form" do
+    it "cannot edit a bulk discount without a name" do
       VCR.use_cassette("bulk_discount_creation") do
         visit "/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit"
 
         fill_in("bulk_discount[name]", with: "")
-        fill_in("bulk_discount[item_threshold]", with: 100)
+        fill_in("bulk_discount[item_threshold]", with: 20)
+        fill_in("bulk_discount[percent_discount]", with: 10)
+
+        click_button("Update Bulk discount")
+
+        expect(page).to have_content("Name can't be blank")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}")
+        expect(page).to have_button("Update Bulk discount")
+      end
+    end
+
+    it "cannot edit a bulk disocunt without an item threshold" do
+      VCR.use_cassette("bulk_discount_creation") do
+        visit "/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit"
+
+        fill_in("bulk_discount[name]", with: "10/10 Discount")
         fill_in("bulk_discount[percent_discount]", with: 0)
 
         click_button("Update Bulk discount")
 
-        expect(page).to have_content("Bulk Discount has not been Updated. Confirm all fields are filled in with correct information. Item Threshold must be greater than 1 and Percent Discount must be greater than 0 and less than 1.")
+        expect(page).to have_content("Item threshold can't be blank")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+        expect(page).to have_button("Update Bulk discount")
+      end
+    end
+
+    it "cannot edit a bulk disocunt without a percent discount" do
+      VCR.use_cassette("bulk_discount_creation") do
+        visit "/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit"
+
+        fill_in("bulk_discount[name]", with: "10/10 Discount")
+        fill_in("bulk_discount[item_threshold]", with: 40)
+
+        click_button("Update Bulk discount")
+
+        expect(page).to have_content("Percent discount can't be blank")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+        expect(page).to have_button("Update Bulk discount")
+      end
+    end
+
+    it "cannot edit a bulk disocunt when a percent discount is less than 1" do
+      VCR.use_cassette("bulk_discount_creation") do
+        visit "/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit"
+
+        fill_in("bulk_discount[name]", with: "10/10 Discount")
+        fill_in("bulk_discount[item_threshold]", with: 40)
+        fill_in("bulk_discount[percent_discount]", with: 0)
+
+        click_button("Update Bulk discount")
+
+        expect(page).to have_content("Percent discount must be greater than or equal to 1")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+        expect(page).to have_button("Update Bulk discount")
+      end
+    end
+
+    it "cannot edit a bulk disocunt when a percent discount is greater than 100" do
+      VCR.use_cassette("bulk_discount_creation") do
+        visit "/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit"
+
+        fill_in("bulk_discount[name]", with: "10/10 Discount")
+        fill_in("bulk_discount[item_threshold]", with: 40)
+        fill_in("bulk_discount[percent_discount]", with: 101)
+
+        click_button("Update Bulk discount")
+
+        expect(page).to have_content("Percent discount must be less than or equal to 100")
         expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
         expect(page).to have_button("Update Bulk discount")
       end

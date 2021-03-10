@@ -144,7 +144,6 @@ RSpec.describe 'invoices show' do
         within(".table") do
           within("#the-status-#{@ii_1.id}") do
             expect(page).to have_link("Bulk Discount #{@bulk_discount2.percent_discount}% Applied")
-            save_and_open_page
           end
 
           within("#the-status-#{@ii_3.id}") do

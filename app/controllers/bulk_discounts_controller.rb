@@ -36,9 +36,9 @@ class BulkDiscountsController < ApplicationController
       flash[:success] = "Your Bulk Discount ##{@bulk_discount.id} has been successfully updated"
       render :show
     else
-      flash[:error] = "Bulk Discount has not been Updated. Confirm all fields are filled in with correct information. Item Threshold must be greater than 1 and Percent Discount must be greater than 0 and less than 1."
+      flash[:errors] = @bulk_discount.errors.full_messages
 
-      redirect_to edit_merchant_bulk_discount_path(@merchant, @bulk_discount)
+      render :edit
     end
   end
 
