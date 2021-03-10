@@ -59,11 +59,12 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
 
         fill_in("bulk_discount[name]", with: "10/10 Discount")
         fill_in("bulk_discount[percent_discount]", with: 0)
+        fill_in("bulk_discount[item_threshold]", with: "" )
 
         click_button("Update Bulk discount")
 
         expect(page).to have_content("Item threshold can't be blank")
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}")
         expect(page).to have_button("Update Bulk discount")
       end
     end
@@ -74,11 +75,12 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
 
         fill_in("bulk_discount[name]", with: "10/10 Discount")
         fill_in("bulk_discount[item_threshold]", with: 40)
+        fill_in("bulk_discount[percent_discount]", with: "")
 
         click_button("Update Bulk discount")
 
         expect(page).to have_content("Percent discount can't be blank")
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}")
         expect(page).to have_button("Update Bulk discount")
       end
     end
@@ -94,7 +96,7 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
         click_button("Update Bulk discount")
 
         expect(page).to have_content("Percent discount must be greater than or equal to 1")
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}")
         expect(page).to have_button("Update Bulk discount")
       end
     end
@@ -110,7 +112,7 @@ RSpec.describe "Merchant Bulk Discount Edit Page" do
         click_button("Update Bulk discount")
 
         expect(page).to have_content("Percent discount must be less than or equal to 100")
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}/edit")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@bulk_discount_1.id}")
         expect(page).to have_button("Update Bulk discount")
       end
     end

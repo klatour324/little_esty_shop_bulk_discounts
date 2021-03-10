@@ -9,7 +9,7 @@
       <h3>Item Quantity Threshold: <%= bulk_discount.item_threshold %></h3>
       <h3>Bulk Discount #<%= link_to "#{bulk_discount.id}", merchant_bulk_discount_path(@merchant, bulk_discount) %> </h3>
       <% if bulk_discount.pending_invoice_items? %>
-        <p>Error: Can't Delete due to Pending Invoices</p>
+        <p>Can't Delete due to Pending Invoices</p>
       <% else %>
         <h3><%= link_to "Delete Bulk Discount", merchant_bulk_discount_path(@merchant, bulk_discount), method: :delete %> </h3>
       <% end %>
