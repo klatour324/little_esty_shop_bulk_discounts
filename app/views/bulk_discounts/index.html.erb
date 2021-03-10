@@ -11,7 +11,7 @@
       <% if bulk_discount.pending_invoice_items? %>
         <p>Can't Delete due to Pending Invoices</p>
       <% else %>
-        <h3><%= link_to "Delete Bulk Discount", merchant_bulk_discount_path(@merchant, bulk_discount), method: :delete %> </h3>
+        <h3><%= button_to "Delete Bulk Discount", merchant_bulk_discount_path(@merchant, bulk_discount), method: :delete %> </h3>
       <% end %>
       <hr>
     </li>
