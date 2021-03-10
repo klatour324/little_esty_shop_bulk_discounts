@@ -15,18 +15,18 @@ RSpec.describe "Merchant Bulk Discount Delete" do
         visit "/merchant/#{@merchant1.id}/bulk_discounts"
 
         within(".bulk-discount-info-#{@bulk_discount_1.id}") do
-          expect(page).to have_link("Delete Bulk Discount")
+          expect(page).to have_button("Delete Bulk Discount")
         end
         within(".bulk-discount-info-#{@bulk_discount_2.id}") do
-          expect(page).to have_link("Delete Bulk Discount")
+          expect(page).to have_button("Delete Bulk Discount")
         end
         within(".bulk-discount-info-#{@bulk_discount_3.id}") do
-          expect(page).to have_link("Delete Bulk Discount")
+          expect(page).to have_button("Delete Bulk Discount")
         end
         within(".bulk-discount-info-#{@bulk_discount_4.id}") do
-          expect(page).to have_link("Delete Bulk Discount")
+          expect(page).to have_button("Delete Bulk Discount")
 
-          click_link("Delete Bulk Discount")
+          click_button("Delete Bulk Discount")
         end
 
         expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts")
@@ -57,11 +57,11 @@ RSpec.describe "Merchant Bulk Discount Delete" do
         visit "/merchant/#{m1.id}/bulk_discounts"
 
         within(".bulk-discount-info-#{bd_1.id}") do
-          expect(page).to have_link("Delete Bulk Discount")
+          expect(page).to have_button("Delete Bulk Discount")
         end
 
         within(".bulk-discount-info-#{bd_2.id}") do
-          expect(page).to_not have_link("Delete Bulk Discount")
+          expect(page).to_not have_button("Delete Bulk Discount")
           expect(page).to have_content("Can't Delete due to Pending Invoices")
         end
       end
