@@ -104,6 +104,7 @@ describe 'Admin Invoices Show Page' do
     it "shows the total revenue including bulk discounts in the calculation" do
       VCR.use_cassette("bulk_discount_creation") do
         visit "/admin/invoices/#{@invoice_1.id}"
+
         expect(page).to have_content("Total Revenue: $234.00")
       end
     end
