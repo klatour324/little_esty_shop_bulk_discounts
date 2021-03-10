@@ -92,11 +92,11 @@ RSpec.describe "Merchant Bulk Discounts Index" do
         visit "/merchant/#{m1.id}/bulk_discounts"
 
         within(".bulk-discount-info-#{bd_1.id}") do
-          expect(page).to have_link("Delete Bulk Discount")
+          expect(page).to have_button("Delete Bulk Discount")
         end
 
         within(".bulk-discount-info-#{bd_2.id}") do
-          expect(page).to_not have_link("Delete Bulk Discount")
+          expect(page).to_not have_button("Delete Bulk Discount")
           expect(page).to have_content("Can't Delete due to Pending Invoices")
         end
       end
