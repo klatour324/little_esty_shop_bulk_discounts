@@ -13,7 +13,7 @@
  - Heroku
 
 ## Background and Description
-"Little Esty Shop" Bulk Discount is an extension upon the "Little Esty Shop" group project. Bulk Discounts requires requires students to build a fictitious e-commerce platform where merchants now have functionality to create bulk discounts for their items. A bulk discount is determined upon the quantity of items the customer buys, for examply, "20% off orders of 10 or more items". The main focus here is being able to demonstrate the one-to-many relationship between a merchant and its bulks discounts, a merchant has many bulk discounts, bulk discounts belong to a merchant, as well as associations between bulk discounts and items, invoice items and invoices through a merchant. 
+"Little Esty Shop" Bulk Discount is an extension upon the "Little Esty Shop" group project. Bulk Discounts requires requires students to build a fictitious e-commerce platform where merchants now have functionality to create bulk discounts for their items. A bulk discount is determined upon the quantity of items the customer buys, for examply, "20% off orders of 10 or more items". The main focus here is being able to demonstrate the one-to-many relationship between a merchant and its bulks discounts, a merchant has many bulk discounts, bulk discounts belong to a merchant, as well as associations between bulk discounts and items, invoice items and invoices through a merchant. This project also involves making API requests to Nager Date Service to request data for the next the US public holidays.
 
 ## Learning Goals
 - Write migrations to create tables and relationships between tables
