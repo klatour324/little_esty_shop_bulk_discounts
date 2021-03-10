@@ -96,9 +96,6 @@ describe 'Admin Invoices Show Page' do
       @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 10, unit_price: 1, status: 2)
       @ii_3 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 20, unit_price: 2, status: 2)
       @ii_4 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_3.id, quantity: 30, unit_price: 3, status: 2)
-      @ii_6 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_4.id, quantity: 40, unit_price: 4, status: 2)
-      @ii_7 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_5.id, quantity: 10, unit_price: 5, status: 2)
-      @ii_8 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_6.id, quantity: 1, unit_price: 6, status: 2)
 
       @transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
 
